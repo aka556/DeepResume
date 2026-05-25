@@ -1,54 +1,68 @@
 /* ScheduleCalendar.css - Custom styles for the interview calendar */
 
-/* Increase time slot height in week and day views */
+/* ── Time slot sizing ── */
 .rbc-time-view .rbc-time-content .rbc-timeslot-group {
   min-height: 60px !important;
 }
-
-/* Ensure events have minimum height */
-.rbc-event {
-  min-height: 50px !important;
-}
-
-/* Month view events don't need minimum height */
-.rbc-month-view .rbc-event {
-  min-height: auto !important;
-}
-
-/* Allow event content to overflow for better text display */
-.rbc-time-view .rbc-event-content {
-  overflow: visible !important;
-}
-
-/* Set time slot height */
 .rbc-time-view .rbc-time-slot {
   height: 30px !important;
 }
 
-/* Style time slot borders for light mode */
+/* ── Event card ── */
+.rbc-event {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+.rbc-time-view .rbc-event {
+  min-height: 50px !important;
+  max-height: 100% !important;
+}
+.rbc-time-view .rbc-event-content,
+.rbc-time-view .rbc-event {
+  overflow: hidden !important;
+}
+.rbc-month-view .rbc-event {
+  min-height: auto !important;
+}
+
+/* ── Event label (time text) ── */
+.rbc-event-label {
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  color: #64748b !important;
+  padding: 0 4px !important;
+}
+.dark .rbc-event-label {
+  color: #94a3b8 !important;
+}
+
+/* ── Time slot borders ── */
 .rbc-day-slot .rbc-time-slot {
   border-top: 1px solid #f1f5f9 !important;
 }
-
-/* Style time slot borders for dark mode */
 .dark .rbc-day-slot .rbc-time-slot {
   border-top: 1px solid rgba(71, 85, 105, 0.3) !important;
-}
-
-/* Improve event label readability */
-.rbc-event-label {
-  font-size: 11px !important;
-  font-weight: 500 !important;
 }
 
 /* Ensure events can expand to show content */
 .rbc-time-content {
   overflow-y: auto !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.rbc-time-content::-webkit-scrollbar {
+  display: none;
 }
 
 /* Better spacing for month view */
 .rbc-month-row {
   min-height: 100px !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.rbc-month-row::-webkit-scrollbar {
+  display: none;
 }
 
 /* Improve calendar header styling */
