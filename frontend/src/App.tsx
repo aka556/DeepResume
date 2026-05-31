@@ -22,6 +22,7 @@ const VoiceInterviewEvaluationPage = lazy(() => import('./pages/VoiceInterviewEv
 const InterviewSchedulePage = lazy(() => import('./pages/InterviewSchedulePage'));
 const InterviewHubPage = lazy(() => import('./pages/InterviewHubPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const InterviewDetailPanel = lazy(() => import('./components/InterviewDetailPanel'));
 
 // Loading component
@@ -171,6 +172,9 @@ function App() {
           <Route path="/" element={<Layout />}>
             {/* 默认重定向到简历管理页面 */}
             <Route index element={<Navigate to="/history" replace />} />
+
+            {/* 面试看板 */}
+            <Route path="dashboard" element={<DashboardPage />} />
 
             {/* 上传页面 */}
             <Route path="upload" element={<UploadPageWrapper />} />
