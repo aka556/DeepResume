@@ -20,15 +20,7 @@ InterviewGuide 是一个集成了简历分析、模拟面试（文字 + 语音�
 
 ## 系统架构
 
-![系统架构图](https://oss.javaguide.cn/xingqiu/pratical-project/interview-guide/interview-guide-architecture-diagram.png)
-
-## 配套教程
-
-本项目承诺**完整功能免费开源**，也不会做所谓的 Pro 版或“付费解锁核心功能”之类的设计。
-
-如果你想学习这个项目，或者希望把它作为个人项目经历 / 毕设选题，我也整理了一套相对细致的教程：从基础设施搭建、核心业务实现，到最后如何在面试中讲清楚思路与亮点，尽量把容易卡住的地方讲透。
-
-如果你确实需要更系统的辅导，可以点这里了解详情（**教程为付费内容**，主要是想覆盖一些时间成本，望理解，感谢支持）：[《SpringAI 智能面试平台+RAG 知识库》](https://javaguide.cn/zhuanlan/interview-guide.html)。
+该项目采用前后端分离架构：前端负责用户交互与页面展示，后端负责业务流程、AI 调用、异步任务和数据管理，底层依赖 PostgreSQL、Redis 和对象存储等基础设施。
 
 ## 技术栈
 
@@ -50,14 +42,6 @@ InterviewGuide 是一个集成了简历分析、模拟面试（文字 + 语音�
 | AWS S3 SDK            | 2.29.51 | S3 兼容对象存储（MinIO/RustFS）|
 | WebSocket             | -     | 语音面试实时双向通信          |
 | Gradle                | 8.14  | 构建工具                      |
-
-技术选型常见问题解答：
-
-1. 数据存储为什么选择 PostgreSQL + pgvector？PG 的向量数据存储功能够用了，精简架构，不想引入太多组件。
-2. 为什么引入 Redis？
-   - Redis 替代 `ConcurrentHashMap` 实现面试会话的缓存。
-   - 基于 Redis Stream 实现简历分析、知识库向量化等场景的异步（还能解耦，分析和向量化可以使用其他编程语言来做）。不使用 [Kafka](https://javaguide.cn/high-performance/message-queue/kafka-questions-01.html) 这类成熟的消息队列，也是不想引入太多组件。
-3. 构建工具为什么选择 Gradle？个人更喜欢用 Gradle，也写过相关的文章：[Gradle核心概念总结](https://javaguide.cn/tools/gradle/gradle-core-concepts.html)。
 
 ### 前端技术
 
@@ -155,58 +139,9 @@ InterviewGuide 是一个集成了简历分析、模拟面试（文字 + 语音�
 
 ## 效果展示
 
-### 简历与面试
+该项目覆盖了简历分析、模拟面试、知识库问答、语音面试和面试安排等真实业务场景，适合用于展示 AI 应用在招聘流程中的落地效果。
 
-面试中心：
-
-![面试中心](https://oss.javaguide.cn/xingqiu/pratical-project/interview-guide/page-interview-hub.png)
-
-Skill 出题 + JD 解析：
-
-![Skill 出题 + JD 解析](https://oss.javaguide.cn/xingqiu/pratical-project/interview-guide/page-skill-jd-parse.png)
-
-简历库：
-
-![简历库](https://oss.javaguide.cn/xingqiu/pratical-project/interview-guide/page-resume-history.png)
-
-简历上传分析：
-
-![简历上传分析](https://oss.javaguide.cn/xingqiu/pratical-project/interview-guide/page-resume-upload-analysis.png)
-
-简历分析详情：
-
-![简历分析详情](https://oss.javaguide.cn/xingqiu/pratical-project/interview-guide/page-resume-analysis-detail.png)
-
-面试记录：
-
-![面试记录](https://oss.javaguide.cn/xingqiu/pratical-project/interview-guide/page-interview-history.png)
-
-面试详情：
-
-![面试详情](https://oss.javaguide.cn/xingqiu/pratical-project/interview-guide/page-interview-detail.png)
-
-模拟面试：
-
-![模拟面试](https://oss.javaguide.cn/xingqiu/pratical-project/interview-guide/page-mock-interview.png)
-
-面试安排
-
-![面试安排](https://oss.javaguide.cn/xingqiu/pratical-project/interview-guide/page-interview-schedule-list.png)
-
-多模型切换 + 语音服务设置：
-
-![管理聊天模型、向量模型和模块配置](https://oss.javaguide.cn/xingqiu/pratical-project/interview-guide/llm-settings.png)
-
-
-### 知识库
-
-知识库管理：
-
-![知识库管理](https://oss.javaguide.cn/xingqiu/pratical-project/interview-guide/page-knowledge-base-management.png)
-
-问答助手：
-
-![问答助手](https://oss.javaguide.cn/xingqiu/pratical-project/interview-guide/page-qa-assistant.png)
+如需展示效果图，可在本地替换为自己的截图和界面内容。
 
 ## 项目结构
 
@@ -277,8 +212,8 @@ interview-guide/
 ### 1. 克隆项目
 
 ```bash
-git clone https://github.com/Snailclimb/interview-guide.git
-cd interview-guide
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
 ```
 
 ### 2. 配置环境变量
@@ -320,15 +255,7 @@ docker compose -f docker-compose.dev.yml down
 docker compose -f docker-compose.dev.yml down -v
 ```
 
-启动后默认账号：
-
-| 服务         | 地址             | 账号            | 密码            |
-| ------------ | ---------------- | --------------- | --------------- |
-| PostgreSQL   | `localhost:5432` | `postgres`      | `123456`        |
-| Redis        | `localhost:6379` | -               | -               |
-| RustFS 控制台 | `localhost:9001` | `rustfsadmin`   | `rustfsadmin`   |
-
-> **注意**：首次启动后需浏览器访问 [http://localhost:9001](http://localhost:9001) 登录 RustFS 控制台，手动创建名为 `interview-guide` 的 Bucket。使用 `docker-compose.dev.yml` + `:app:bootRun` 时，请确保 `.env` 中的 `APP_STORAGE_ACCESS_KEY` / `APP_STORAGE_SECRET_KEY` 与 RustFS 账号一致，例如都设为 `rustfsadmin`。如果本地已有 MinIO 或其他 S3 兼容存储，也可以直接使用，在 `.env` 中修改 `APP_STORAGE_*` 配置即可。
+启动后可在本地访问相关服务，默认端口通常为 PostgreSQL `5432`、Redis `6379` 和 RustFS `9000/9001`。首次启动后，建议在 RustFS 控制台中创建项目所需的桶，并确保 `.env` 中的对象存储配置与实际账号一致。
 
 ### 4. 启动应用
 
@@ -360,14 +287,14 @@ Docker Compose 编排了 6 个服务：PostgreSQL（pgvector）、Redis、MinIO�
 
 ### 1. 前置准备
 
-- 安装 [Docker](https://www.docker.com/products/docker-desktop/) 和 Docker Compose
-- 申请阿里云百炼 API Key（用于 AI 对话功能，申请地址：<https://bailian.console.aliyun.com/>）
+- 安装 Docker 和 Docker Compose
+- 准备 AI 服务的 API Key，并在本地环境变量中配置
 
 ### 2. 快速启动
 
 在项目根目录下执行：
 
-`.env.example` 中的 PostgreSQL、Redis、MinIO 已与 `docker-compose.yml` 对齐（数据库用户 `postgres` / 密码 `password`，MinIO `minioadmin` / `minioadmin`）。复制为 `.env` 后主要填写 `AI_BAILIAN_API_KEY`；若你曾在旧版本中使用过不同的库密码或对象存储密钥，请同步修改 `.env`，必要时重建 Postgres 卷以免旧数据与密码不一致。
+复制一份 `.env.example` 到 `.env`，然后根据实际环境填写所需的 AI、数据库和对象存储配置。对于开发环境，建议保留默认值或使用自己的本地环境变量，避免把真实凭据写入仓库。
 
 ```bash
 # 1. 复制环境变量配置文件
@@ -392,17 +319,14 @@ docker-compose up -d --build
 
 ### 3. 服务访问
 
-启动完成后，您可以通过以下地址访问各个服务：
+启动完成后，可通过本地端口访问各个服务，常见入口包括：
 
-| 服务             | 地址                                           | 默认账号     | 默认密码     | 说明                   |
-| ---------------- | ---------------------------------------------- | ------------ | ------------ | ---------------------- |
-| **前端应用**     | [http://localhost](http://localhost)           | -            | -            | 用户访问入口           |
-| **后端 API**     | [http://localhost:8080](http://localhost:8080) | -            | -            | RESTful API            |
-| **接口文档**     | [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) | - | - | SpringDoc/Swagger UI |
-| **MinIO 控制台** | [http://localhost:9001](http://localhost:9001) | `minioadmin` | `minioadmin` | 对象存储管理           |
-| **MinIO API**    | `localhost:9000`                               | -            | -            | S3 兼容接口            |
-| **PostgreSQL**   | `localhost:5432`                               | `postgres`   | `password`   | 数据库 (包含 pgvector) |
-| **Redis**        | `localhost:6379`                               | -            | -            | 缓存与消息队列         |
+- 前端应用：`http://localhost`
+- 后端 API：`http://localhost:8080`
+- 接口文档：`http://localhost:8080/swagger-ui.html`
+- 对象存储控制台：`http://localhost:9001`
+- PostgreSQL：`localhost:5432`
+- Redis：`localhost:6379`
 
 ### 4. 常用运维命令
 
@@ -474,7 +398,7 @@ spring:
 
 ### Q: 简历分析失败
 
-检查一下阿里云 DashScope API KEY 是否配置正确（申请地址：<https://bailian.console.aliyun.com/>）。
+检查 AI 服务的 API Key 是否已正确配置，并确认模型访问权限正常。
 
 ### Q: 设置页新增/切换模型后不生效？
 
